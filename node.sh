@@ -1,1 +1,1 @@
-screen -S node node ./bin/www
+screen -US node node ./bin/www

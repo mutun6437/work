@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="./javascripts/jquery.js"></script>
+
 </head>
  
 <body>
@@ -25,6 +26,13 @@
 		仕入値:<input type="text" name="projectCost" id="projectCost"><br>
 		<input type="button" id="searchProject"  value="登録">
 	</form>
+
+	<hr>
+	<h3>リスト</h3>
+	<div id="list">
+
+		
+	</div>
 
 	<hr>
 
@@ -132,7 +140,12 @@
 			method:"POST",
 			data:data
 		}).done(function(result){
-			console.log("結果"+JSON.stringify(result));
+			/*var param = "";
+			for(i=0;i<result.lengthi++){
+				"data1"param
+			}*/
+			//window.open("http://"+domain+"/project/"+buildQueryString(result[0]);
+			createList(result);
 		});
 	});
 
@@ -253,5 +266,5 @@
 
 
 </script>
-
+  <script src="./javascripts/util.js"></script>
 </html>

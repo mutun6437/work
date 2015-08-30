@@ -1,6 +1,6 @@
 var data = exports.data =[
 	{
-				name:"サイバーエージェント",name:"Javaサーバーサイド開発",address:"渋谷",detail:"amebaピグのサーバーサイド開発業務",cost:200,span:"即～長期",
+				name:"サイバーエージェント",project:"Javaサーバーサイド開発",address:"渋谷",detail:"amebaピグのサーバーサイド開発業務",cost:200,span:"即～長期",
 				priority:[{
 					name:"Java",experience:36
 					}],
@@ -28,7 +28,7 @@ var data = exports.data =[
 				
 	},{
 		
-				name:"ゆめみ",name:"大規模スマホアプリ基盤　PL業務",address:"三軒茶屋",detail:"企業のマーケティングに活用するアプリに関連する、サブシステム・Webシステムの開発PJのマネジメントを担当いただきます。",cost:"80",span:"即～長期",
+				name:"ゆめみ",project:"大規模スマホアプリ基盤　PL業務",address:"三軒茶屋",detail:"企業のマーケティングに活用するアプリに関連する、サブシステム・Webシステムの開発PJのマネジメントを担当いただきます。",cost:"80",span:"即～長期",
 				priority:[{
 					name:"PM",experience:0
 					},{
@@ -45,7 +45,7 @@ var data = exports.data =[
 				genre:"ディレクター",interview:1,minAge:0,maxAge:50,
 				other:["MVCモデルでのWebアプリケーション設計・開発経験","Linuxコマンドを用いてログを追うことができる","アグレッシブな方","アーキテクチャ構成図を作成できる"]
 	},{
-				name:"DMM",name:"マーケティング向けツール開発・保守",address:"恵比寿",detail:"解析環境の整備、マーケティングツールの設計・開発保守・テスト※業務拡大に際し、新規開発&保守開発のラインを強化するため",cost:"60",span:"即～長期",
+				name:"DMM",project:"マーケティング向けツール開発・保守",address:"恵比寿",detail:"解析環境の整備、マーケティングツールの設計・開発保守・テスト※業務拡大に際し、新規開発&保守開発のラインを強化するため",cost:"60",span:"即～長期",
 				priority:[{
 					name:"PHP",experience:36
 					},{
@@ -58,7 +58,7 @@ var data = exports.data =[
 				genre:"業務システム",interview:1,minAge:0,maxAge:40,
 				other:["Web解析・効果測定に興味がある方","管理ツール・解析ツール製造経験ある方"]
 	},{
-		name:"エス・エム・エス",name:"Webマーケティング施策支援",address:"浜松町",detail:"Webマーケティングの施策に基づくサイト改修",cost:"70",span:"即～長期",
+		name:"エス・エム・エス",project:"Webマーケティング施策支援",address:"浜松町",detail:"Webマーケティングの施策に基づくサイト改修",cost:"70",span:"即～長期",
 				priority:[{
 					name:"PHP",experience:36
 					},{
@@ -72,7 +72,7 @@ var data = exports.data =[
 				other:["ショッピングサイト、キュレーションサイト、ポータルサイトなど、toC(一般消費者向け)のサイトの保守・運用経験がある","Webマーケティングについての基本的な知識がある"]
 
 	},{
-name:"カヤック",name:"Lobiチーム業務（チャット＆ゲームコミュニティ）",address:"横浜",detail:"Androidエンジニア",cost:"90",span:"即～長期",
+name:"カヤック",project:"Lobiチーム業務（チャット＆ゲームコミュニティ）",address:"横浜",detail:"Androidエンジニア",cost:"90",span:"即～長期",
 				priority:[{
 					name:"Android",experience:36
 					}],

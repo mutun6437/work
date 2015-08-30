@@ -9,6 +9,11 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/project/:data', function(req, res) {
+  res.render('project', req.params.data);
+});
+
+
 
 router.post('/company/create',function(req,res){
 	console.log("POST /company");
@@ -60,7 +65,7 @@ router.post('/project/create',function(req,res){
 
 
 
-router.get('/project',function(req,res){
+/*router.get('/project',function(req,res){
 	console.log("GET /company");
 	var params = req.body;
 	model.findAll().then(function(result){
@@ -68,7 +73,7 @@ router.get('/project',function(req,res){
 	},function(err){
 		res.end(err);
 	});
-});
+});*/
 
 
 
