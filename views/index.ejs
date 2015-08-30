@@ -96,6 +96,12 @@
 
 
 <script type="text/javascript">
+	var domain = "182.163.52.82:3000";
+	//var domain = "localhost:3000";
+
+
+
+
 	var priority = [],secondary = [];
 	var priorityIndex = 0,secondaryIndex = 0;
 
@@ -107,7 +113,7 @@
 		};
 
 		$.ajax({
-			url:"http://localhost:3000/company/create",
+			url:"http://"+domain+"/company/create",
 			method:"POST",
 			data:data
 		}).done(function(result){
@@ -125,7 +131,7 @@
 		console.log(data);
 
 		$.ajax({
-			url:"http://localhost:3000/project/find",
+			url:"http://"+domain+"/project/find",
 			method:"POST",
 			data:data
 		}).done(function(result){
@@ -157,7 +163,7 @@
 		console.log(data);
 
 		$.ajax({
-			url:"http://localhost:3000/project/create",
+			url:"http://"+domain+"/project/create",
 			method:"POST",
 			contentType:'application/json',
 			data:JSON.stringify(data)
