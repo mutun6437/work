@@ -51,8 +51,8 @@ var Skill = mongoose.model('Skill');
 
 
 //再起動後に削除
-Company.remove({},function(err){});
-Project.remove({},function(err){});
+//Company.remove({},function(err){});
+//Project.remove({},function(err){});
 
 
 
