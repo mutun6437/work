@@ -28,7 +28,8 @@ var ProjectSchema = new Schema({
 	foreigner:Boolean,
 	maxAge:Number,
 	number:Number,
-	other:String
+	other:[String],
+	question:[String]
 });
 mongoose.model('Project', ProjectSchema);
 
@@ -87,8 +88,8 @@ var demo = require("./demo.js");
 
 for(var i = 0;i<demo.data.length; i++){
 	console.log(demo.data[i].name);
-	var company = new Company(demo.data[i]);
-	company.save(function(err){
+	var project = new Project(demo.data[i]);
+	project.save(function(err){
 		if(err){console.log(err);}
 		console.log("デモデータが挿入されました");
 	});
@@ -163,15 +164,19 @@ exports.getProject = getProject = function(param){
 
 			var results = projects;
 
+			//console.log(typeof(results.priority));
+
 
 			/*スキル検索*/
 			var skillResult = [];
 			if(param.skill){
-				results.priority.filter(function(skill,index){
-					if(skill.name === param.skill){
-						console.log("一致");
-						skillResult.push(project);
-					}
+				results.filter(function(project,index){
+					project.priority.filter(function(skill,index){
+						if(skill.name === param.skill){
+							console.log("一致");
+							skillResult.push(project);
+						}
+					});
 				});
 				results = skillResult;
 			}
@@ -180,11 +185,14 @@ exports.getProject = getProject = function(param){
 			/*経験年数*/
 			var experienceResult = [];
 			if(param.experience){
-				results.priority.filter(function(skill,index){
-					if(skill.experience <= Math.ceil(param.experience)){
-						console.log("一致");
-						experienceResult.push(project);
-					}
+				results.filter(function(project,index){
+					project.priority.filter(function(skill,index){
+						console.log(skill.experience+":"+param.experience);
+						if(skill.experience <= Math.ceil(param.experience)){
+							console.log("一致");
+							experienceResult.push(project);
+						}
+					});
 				});
 				results = experienceResult;
 			}
@@ -194,7 +202,7 @@ exports.getProject = getProject = function(param){
 			/*単価*/
 			var costResult = [];
 			if(param.cost){
-				results.cost.filter(function(project,index){
+				results.filter(function(project,index){
 					if(project.cost >= param.cost/0.84){
 						console.log("一致");
 						costResult.push(project);

@@ -1,1 +1,1 @@
-screen -S node nodemon ./bin/www
+screen -S node node ./bin/www

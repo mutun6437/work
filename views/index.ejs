@@ -21,7 +21,7 @@
 	<h3>要員検索</h3>
 	<form>
 		スキル:<input type="text" name="projectSkill" id="projectSkill"><br>
-		経験年数：<input type="text" name="projectExperience" id="projectExperience"><br>
+		経験年数：<input type="text" name="projectExperience" id="projectExperience">ヶ月<br>
 		仕入値:<input type="text" name="projectCost" id="projectCost"><br>
 		<input type="button" id="searchProject"  value="登録">
 	</form>
@@ -99,9 +99,6 @@
 	var domain = "182.163.52.82:3000";
 	//var domain = "localhost:3000";
 
-
-
-
 	var priority = [],secondary = [];
 	var priorityIndex = 0,secondaryIndex = 0;
 
@@ -158,7 +155,7 @@
 			'interview':$("#interview").val(),
 			'foreigner':$("#foreigner").val(),
 			'number':$("#number").val(),
-			'other':$("#other").val()
+			'other':[$("#other").val()]
 		};
 		console.log(data);
 
