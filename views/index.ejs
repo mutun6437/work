@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./javascripts/jquery.js"></script>
+</head>
+ 
+<body>
+
+	<h3>会社登録</h3>
+	<form>
+		会社名:<input type="text" name="name" id="companyName"><br>
+		所在地：<input type="text" name="address" id="companyAddress"><br>
+		商流:<input type="text" name="route" id="companyRoute"><br>
+		<input type="button" id="submitCompany"  value="登録">
+	</form>
+
+	<hr>
+
+	<h3>要員検索</h3>
+	<form>
+		スキル:<input type="text" name="projectSkill" id="projectSkill"><br>
+		経験年数：<input type="text" name="projectExperience" id="projectExperience"><br>
+		仕入値:<input type="text" name="projectCost" id="projectCost"><br>
+		<input type="button" id="searchProject"  value="登録">
+	</form>
+
+	<hr>
+
+
+	<h3>案件情報</h3>
+		<form>
+			会社名:<input type="text" name="name" id="name"><br>
+			商流:<input type="text" name="route" id="route"><br>
+			案件名:<input type="text" name="project" id="project"><br>
+			内容:<textarea type="text" name="detail" id="detail" rows="2" cols="50"></textarea><br>
+			場所:<input type="text" name="address" id="address"><br>
+			期間:<input type="text" name="span" id="span"><br>
+			時間:<input type="text" name="time" id="time"><br><br>
+			【必須スキル】:
+				<table id="priority">
+					<tr><td>スキル</td><td>経験年数</td><td><td>追加</td></tr>
+					<tr><td><input type="text" name="priority" id="priority0"></td><td>
+						<select name="priority" id="experience0">
+							<option value=0>指定なし</option>
+							<option value=1>未経験可能</option>
+							<option value=2>半年未満</option>
+							<option value=12>1年以上</option>
+							<option value=24>2年以上</option>
+							<option value=36>3年以上</option>
+							<option value=48>4年以上</option>
+							<option value=60>5年以上</option>
+							<option value=84>7年以上</option>
+							<option value=120>10年以上</option>
+						</select>
+					</td>
+					<td><input type="button" id="add" value="追加" onClick="createPriority()"></td></tr>
+				</table><br>
+			【尚可スキル】:
+				<table id="secondary">
+					<tr><td>スキル</td><td>経験年数</td><td><td>追加</td></tr>
+					<tr><td><input type="text" name="secondary" id="secondary0"></td><td>
+						<select name="secondary" id="_experience0">
+							<option value=0>指定なし</option>
+							<option value=1>未経験可能</option>
+							<option value=2>半年未満</option>
+							<option value=12>1年以上</option>
+							<option value=24>2年以上</option>
+							<option value=36>3年以上</option>
+							<option value=48>4年以上</option>
+							<option value=60>5年以上</option>
+							<option value=84>7年以上</option>
+							<option value=120>10年以上</option>
+						</select>
+					</td>
+					<td><input type="button" id="add" value="追加" onClick="createSecondary()"></td></tr>
+				</table><br>
+			MAX 単価:<input type="number" name="cost" id="cost">万円<br>
+			精算:<input type="text" name="range" id="range"><br>
+			面談:<input type="number" name="interview" id="interview">回<br>
+			募集人数:<input type="number" name="number" id="number">人<br>
+			外国籍:<select name="foreigner">
+					<option value=true>不可</option>
+					<option value=false>可</option>
+				</select><br>
+			備考:<textarea name="other" rows="15" cols="50"></textarea><br><br>
+			<input type="button" id="submitProject"  value="登録">
+		</form>
+
+
+
+	
+
+</body>
+
+
+<script type="text/javascript">
+	var priority = [],secondary = [];
+	var priorityIndex = 0,secondaryIndex = 0;
+
+	$("#submitCompany").click(function(){
+		var data = {
+			name:$("#projectSkill").val(),
+			experience:$("#projectExperience").val(),
+			cost:$("#projectCost").val()
+		};
+
+		$.ajax({
+			url:"http://localhost:3000/company/create",
+			method:"POST",
+			data:data
+		}).done(function(result){
+			console.log("結果"+result);
+		});
+	});
+
+
+	$("#searchProject").click(function(){
+		var data = {
+			skill:$("#projectSkill").val(),
+			experience:$("#projectExperience").val(),
+			cost:$("#projectCost").val()
+		};
+		console.log(data);
+
+		$.ajax({
+			url:"http://localhost:3000/project/find",
+			method:"POST",
+			data:data
+		}).done(function(result){
+			console.log("結果"+JSON.stringify(result));
+		});
+	});
+
+
+
+	$("#submitProject").click(function(){
+		console.log("priority"+JSON.stringify(priority));
+		var data = {
+			'name':$("#name").val(),
+			'route':$("#route").val(),
+			'project':$("#project").val(),
+			'detail':$("#detail").val(),
+			'address':$("#address").val(),
+			'span':$("#span").val(),
+			'time':$("#time").val(),
+			'priority':priority,
+			'secondary':secondary,
+			'cost':$("#cost").val(),
+			'range':$("#range").val(),
+			'interview':$("#interview").val(),
+			'foreigner':$("#foreigner").val(),
+			'number':$("#number").val(),
+			'other':$("#other").val()
+		};
+		console.log(data);
+
+		$.ajax({
+			url:"http://localhost:3000/project/create",
+			method:"POST",
+			contentType:'application/json',
+			data:JSON.stringify(data)
+		}).done(function(result){
+			console.log("結果"+JSON.stringify(result));
+		});
+	});
+
+
+
+	function createPriority(){
+		var name = document.getElementById("priority"+priorityIndex).value;
+		var experience = document.getElementById("experience"+priorityIndex).value;
+
+		if(name ===""){
+			alert("スキル名を入力してください");
+			return;
+		}
+
+
+		var value = {
+			"name":name,
+			"experience":experience
+		}
+		priority.push(value);
+		priorityIndex++;
+
+		var tr =  document.createElement("tr");
+
+		tr.innerHTML = "<td><input type='text' name='priority' id='priority"+priorityIndex+"'></td><td>"+
+						"<select name='experience' id='experience"+priorityIndex+"'>"+
+							"<option value=0>指定なし</option>"+
+							"<option value=1>未経験可能</option>"+
+							"<option value=2>半年未満</option>"+
+							"<option value=12>1年以上</option>"+
+							"<option value=24>2年以上</option>"+
+							"<option value=36>3年以上</option>"+
+							"<option value=48>4年以上</option>"+
+							"<option value=60>5年以上</option>"+
+							"<option value=84>7年以上</option>"+
+							"<option value=120>10年以上</option>"+
+						"</select>"+
+					"</td>"+
+					"<td><input type='button' id='add' value='追加' onClick='createPriority()''></td>";
+		document.getElementById("priority").appendChild(tr);
+
+	}
+
+
+
+
+	function createSecondary(){
+		var name = document.getElementById("secondary"+secondaryIndex).value;
+		var experience = document.getElementById("_experience"+secondaryIndex).value;
+
+		if(name ===""){
+			alert("スキル名を入力してください");
+			return;
+		}
+
+
+		var value = {
+			"name":name,
+			"experience":experience
+		}
+		secondary.push(value);
+		secondaryIndex++;
+
+		var tr =  document.createElement("tr");
+
+		tr.innerHTML = "<td><input type='text' name='secondary' id='secondary"+secondaryIndex+"'></td><td>"+
+						"<select name='experience' id='_experience"+secondaryIndex+"'>"+
+							"<option value=0>指定なし</option>"+
+							"<option value=1>未経験可能</option>"+
+							"<option value=2>半年未満</option>"+
+							"<option value=12>1年以上</option>"+
+							"<option value=24>2年以上</option>"+
+							"<option value=36>3年以上</option>"+
+							"<option value=48>4年以上</option>"+
+							"<option value=60>5年以上</option>"+
+							"<option value=84>7年以上</option>"+
+							"<option value=120>10年以上</option>"+
+						"</select>"+
+					"</td>"+
+					"<td><input type='button' id='add' value='追加' onClick='createSecondary()''></td>";
+		document.getElementById("secondary").appendChild(tr);
+
+	}
+
+
+
+</script>
+
+</html>
